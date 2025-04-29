@@ -28,19 +28,19 @@ public class PracticeProblem {
 	public static int minCostClimbingStairs(int[] num) {
 		HashMap<Integer, Integer> map = new HashMap<>();
 		if (num.length == 1) {
-			return stairsHelper(num, 0, 0, map);
+			return stairsHelper(num,0, map);
 		}
-		return Math.min(stairsHelper(num, 0, 0, map), stairsHelper(num, 1, 0, map));
+		return Math.min(stairsHelper(num, 0, map), stairsHelper(num, 1, map));
 	}
 
-	public static int stairsHelper(int[] nums, int pos, int currCost, HashMap<Integer, Integer> map) {
+	public static int stairsHelper(int[] nums, int pos, HashMap<Integer, Integer> map) {
 		if (pos >= nums.length) {
-			return currCost;
+			return 0;
 		} else if (map.containsKey(pos)) {
 			return map.get(pos);
 		}
 
-		int result = Math.min(stairsHelper(nums, pos + 1, currCost, map), stairsHelper(nums, pos + 2, currCost, map)) + nums[pos];
+		int result = Math.min(stairsHelper(nums, pos + 1, map), stairsHelper(nums, pos + 2, map)) + nums[pos];
 		map.put(pos, result);
 		return result;
 	}
